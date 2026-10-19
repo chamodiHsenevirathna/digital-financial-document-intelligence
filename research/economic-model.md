@@ -4,7 +4,7 @@
 
 **What this is not:** a revenue forecast, ROI estimate, market-size estimate, pricing recommendation, or evidence of demand. **The commercial case is unvalidated.** No credible willingness-to-pay data, customer commitments, or pricing for competing products was found (see §6). Observed financial outcomes: none. Everything below is a modeled scenario.
 
-Reproduce all numbers with `python3 -I research/economic_model.py` (standard library only). Evidence IDs refer to [../evidence-register.md](../evidence-register.md).
+Every figure below can be recomputed by hand or in a spreadsheet from the inputs in §1 and the formulas in §3; no code is needed. (The tables were first generated with a short Python script that has since been removed from the repository, because it contained no logic beyond the formulas stated here.) Evidence IDs refer to [../evidence-register.md](../evidence-register.md).
 
 ## 1. Inputs and their provenance
 
@@ -34,9 +34,14 @@ Not modeled (no evidence): integration and procurement effort, compliance certif
 | Security & compliance | fixed monthly | Assumption |
 | Error correction & overhead | cost when a wrong answer is accepted | Not modeled; depends on the false acceptance rate, which is unmeasured |
 
-## 3. Results (computed by the script)
+## 3. Formulas and results
 
-Incremental variable cost = (parse cost/page − baseline parse cost) × pages + (intervention LLM/Q − baseline LLM/Q) × questions.
+**Formulas** (all inputs from §1):
+
+- **Incremental variable cost per document (V)** = (parse cost per page − baseline parse cost per page) × pages + (intervention LLM cost per question − baseline LLM cost per question) × questions. The baseline parse cost is $0 and the baseline LLM cost is $0.01 per question.
+- **Break-even minutes per document (Table B)** = V ÷ analyst hourly rate × 60.
+- **Documents per month to cover fixed cost (Table C)** = fixed monthly cost ÷ (minutes saved ÷ 60 × analyst hourly rate − V_base), where V_base = $1.50. Where the denominator is zero or negative, no volume breaks even ("n/a").
+- **Worked example (Table A, row 5; Table B, row 5; Table C, row 2):** V = (0.005 − 0) × 150 + (0.04 − 0.01) × 25 = 0.75 + 0.75 = $1.50. At $80/h: 1.50 ÷ 80 × 60 = 1.125, shown as 1.13 minutes. For Table C at $10,000/month, $80/h and 5 minutes saved: 10,000 ÷ (5 ÷ 60 × 80 − 1.50) = 10,000 ÷ 5.1667 ≈ 1,935 documents.
 
 **Table A — incremental variable cost per document (USD), 25 questions**
 
@@ -57,18 +62,22 @@ Incremental variable cost = (parse cost/page − baseline parse cost) × pages +
 
 Range across all inputs: **$0.26** (80 pages, 10 questions, open-source layout, $0.02/Q) to **$19.50** (300 pages, 50 questions, VLM parsing, $0.10/Q).
 
-**Table B — analyst minutes saved per document needed to recover the variable cost**
+**Table B — analyst minutes saved per document needed to recover the variable cost** (all twelve scenarios of Table A, 25 questions). Values are rounded half-up to two decimals. Three cells that are exact halves (1.125, 14.625, 23.625) were shown as 1.12, 14.62 and 23.62 in an earlier version of this table because of floating-point formatting in the script that generated it; they are corrected here to match hand calculation. No conclusion changes.
 
 | Scenario | @ $40/h | @ $80/h | @ $150/h |
 |---|---:|---:|---:|
 | Open-source layout / 150p / $0.04 | 1.58 | 0.79 | 0.42 |
 | Open-source layout / 150p / $0.10 | 3.83 | 1.91 | 1.02 |
-| Commercial / 150p / $0.04 | 2.25 | 1.12 | 0.60 |
+| Open-source layout / 300p / $0.04 | 2.03 | 1.01 | 0.54 |
+| Open-source layout / 300p / $0.10 | 4.28 | 2.14 | 1.14 |
+| Commercial / 150p / $0.04 | 2.25 | 1.13 | 0.60 |
+| Commercial / 150p / $0.10 | 4.50 | 2.25 | 1.20 |
+| Commercial / 300p / $0.04 | 3.38 | 1.69 | 0.90 |
 | Commercial / 300p / $0.10 | 5.63 | 2.81 | 1.50 |
 | VLM parsing / 150p / $0.04 | 12.38 | 6.19 | 3.30 |
+| VLM parsing / 150p / $0.10 | 14.63 | 7.31 | 3.90 |
+| VLM parsing / 300p / $0.04 | 23.63 | 11.81 | 6.30 |
 | VLM parsing / 300p / $0.10 | 25.88 | 12.94 | 6.90 |
-
-(Full table in the script output; selected rows shown.)
 
 **Table C — documents per month needed for analyst time saved to cover fixed monthly cost.** Variable cost fixed at the base case ($1.50/doc: commercial parser, 150 pages, 25 questions, $0.04/Q). Cells = fixed cost ÷ (value of minutes saved − variable cost); "n/a" means the saved time is worth less than the variable cost.
 

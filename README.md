@@ -2,7 +2,7 @@
 
 An evidence-based product-management case study. **Status: desk research complete (2026-10-19); no interviews, experiments or prototype.** This is a research investigation, not a product build, and the central hypothesis is tested rather than assumed.
 
-> **Author and AI-use disclosure.** Repository owner: Chamodi Senevirathna, who supplied the research brief and the hypothesis under test. The research, analysis, writing and the economic-model script were produced by an AI model (Claude, via Claude Code) on 2026-10-19; source retrieval and summarization were AI-mediated. No interviews, surveys, product trials or experiments were conducted, and no human reviewer has independently verified the sources or calculations. [methodology/ai-use-and-research-limitations.md](methodology/ai-use-and-research-limitations.md) states what was and was not checked.
+> **Author and AI-use disclosure.** Repository owner: Chamodi Senevirathna, who supplied the research brief and the hypothesis under test. The research, analysis, writing and the economic-model calculations were produced by an AI model (Claude, via Claude Code) on 2026-10-19; source retrieval and summarization were AI-mediated. No interviews, surveys, product trials or experiments were conducted, and no human reviewer has independently verified the sources or calculations. [methodology/ai-use-and-research-limitations.md](methodology/ai-use-and-research-limitations.md) states what was and was not checked.
 
 ## Executive summary
 
@@ -53,7 +53,7 @@ Baseline arms (plain PDF-to-text RAG; stronger hybrid baseline; frontier long-co
 
 ## Economic and operational considerations
 
-A scenario model (reproducible with [research/economic_model.py](research/economic_model.py)) shows incremental variable cost per document of about **$0.26–$19.50** under author-chosen assumptions, and that break-even depends mainly on minutes of analyst time saved per document, the one input with no evidence. It includes **no revenue forecast, ROI or market size**, since credible data are unavailable. Security, privacy and financial correctness are treated as core requirements (prompt-injection exposure from uploaded files, access isolation, audit logging, no consequential actions) in [research/technical-analysis.md](research/technical-analysis.md). The commercial case is **unvalidated**. See [research/economic-model.md](research/economic-model.md).
+A scenario model (inputs and formulas documented in [research/economic-model.md](research/economic-model.md); recomputable by hand) shows incremental variable cost per document of about **$0.26–$19.50** under author-chosen assumptions, and that break-even depends mainly on minutes of analyst time saved per document, the one input with no evidence. It includes **no revenue forecast, ROI or market size**, since credible data are unavailable. Security, privacy and financial correctness are treated as core requirements (prompt-injection exposure from uploaded files, access isolation, audit logging, no consequential actions) in [research/technical-analysis.md](research/technical-analysis.md). The commercial case is **unvalidated**. See [research/economic-model.md](research/economic-model.md).
 
 ## Final recommendation
 
@@ -80,21 +80,11 @@ Desk research only; most papers read at abstract level; vendor and secondary sou
 | [research/evaluation-plan.md](research/evaluation-plan.md) | Datasets, arms, ablations, metrics, acceptance criteria |
 | [research/product-strategy.md](research/product-strategy.md) | Use-case scoring, product hypothesis, decision |
 | [research/economic-model.md](research/economic-model.md) | Scenario model and missing commercial evidence |
-| [research/economic_model.py](research/economic_model.py) | Script that regenerates the model's tables |
 | [methodology/ai-use-and-research-limitations.md](methodology/ai-use-and-research-limitations.md) | AI disclosure, verification status, limitations |
-| [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt), [LICENSE-MIT.txt](LICENSE-MIT.txt) | License texts (see Licensing) |
-
-## Reproducing the economic tables
-
-```bash
-python3 -I research/economic_model.py
-```
+| [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) | License text (see Licensing) |
 
 ## Licensing
 
-| Material | License |
-|---|---|
-| Documentation and written case-study content: `README.md`, `research-plan.md`, `evidence-register.md`, everything in `research/` except the script, and everything in `methodology/` | [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE-CC-BY-4.0.txt) |
-| Code: `research/economic_model.py` | [MIT](LICENSE-MIT.txt) |
+All written content in this repository is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE-CC-BY-4.0.txt). The repository contains no software.
 
 Third-party sources cited here (papers, datasets, vendor pages) remain under their own terms; this repository links to them and quotes only short excerpts. Dataset licenses mentioned in the evidence register are as stated on the sources' pages and are not legal advice. The repository contains no credentials, personal data or confidential documents.

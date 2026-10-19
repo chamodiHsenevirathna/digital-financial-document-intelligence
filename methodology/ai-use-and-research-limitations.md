@@ -10,9 +10,9 @@ This case study was produced with substantial AI assistance. This document state
 | Source discovery | Claude using a web-search tool and a page-fetch tool | Ran searches, fetched pages and PDFs, and summarized them. The fetch tool answers questions about a page using a smaller model, so **summaries are AI-mediated, not verbatim reads** |
 | Reading papers | Claude; for two papers (E14, E15) the PDF text was extracted locally with `pdftotext` and partly read by Claude | Extracted findings; most other papers were read at abstract-page level only |
 | Analysis and synthesis | Claude | Categorized failure modes, drafted the comparison tables, scored use cases, wrote the evaluation plan |
-| Calculations | Claude wrote `research/economic_model.py`; it was executed and its output pasted into the economic model; selected arithmetic was re-checked by hand during writing | |
+| Calculations | Claude | Computed the economic tables with a short Python script during drafting. The script was later removed from the repository because it added nothing beyond the formulas now documented in `research/economic-model.md` |
 | Writing | Claude drafted all text in this repository | |
-| Coding | Only the economic scenario script | |
+| Coding | None in the published repository | |
 
 **Human role.** The repository owner supplied the brief and hypothesis and is responsible for publication. At the time this document was written, the AI has no record that the owner independently verified any claim, source or calculation. That should be treated as not yet done unless the owner states otherwise in a revision.
 
@@ -23,7 +23,7 @@ This case study was produced with substantial AI assistance. This document state
 **Sources not opened (search-result summary only, depth SNIP):** DocFinQA initial details (later opened as ABS), Procycons blog, FinanceBench long-context figures (the 76–79% and 25%→78% numbers come from search-result text quoting the paper), Hebbia vs Rogo comparison pages, Rogo funding reports, Daloopa partner pages, Claude-for-Excel secondary pages, CFO Impulse Substack, Capterra snippet. These are flagged Low confidence and are not used as decisive evidence.
 
 **Quantitative claims independently re-checked by a second source or by calculation:**
-- Table A–C arithmetic in the economic model: recomputed by hand for selected cells and by the script.
+- Table A–C arithmetic in the economic model: recomputed during a later review from the inputs and formulas written in `economic-model.md` alone, using a separately written calculation (all 12 Table A rows, all 12 Table B rows, all 9 Table C rows, the $0.26–$19.50 range and the break-even ranges quoted in §4), with no discrepancy found. This was done by the same AI, not by a human reviewer, and the inputs themselves are assumptions.
 - Use-case weighted scores: computed by a separate short script (weights sum to 100).
 - Everything else is **single-source**: figures such as FinanceBench's 81%, Fin-RATE's 18.60%/14.35% drops, TAT-QA's 58.0/90.8 F1 and the legal-RAG 17–33% come from the cited abstracts or pages and were not reproduced.
 
@@ -71,4 +71,4 @@ Consequently the "Workflow" descriptions are inferences, and no user quotes appe
 
 ## 6. What a reviewer should do before relying on this
 
-Open the cited URLs for any number that matters; read the full papers behind E04, E14, E15 and E17; run the economic script with your own assumptions; and treat all `[HYP]` and `[GAP]` items as open questions.
+Open the cited URLs for any number that matters; read the full papers behind E04, E14, E15 and E17; recompute the economic tables with your own assumptions using the formulas in `research/economic-model.md`; and treat all `[HYP]` and `[GAP]` items as open questions.
