@@ -1,0 +1,21 @@
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Environment and secrets
+.env
+.env.*
+*.pem
+*.key
+
+# Downloaded or private documents and raw outputs (keep public-source links, not copies)
+data/raw/
+data/private/
+*.pdf
+diagnostics/
