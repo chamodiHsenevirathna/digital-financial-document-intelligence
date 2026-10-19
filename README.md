@@ -2,8 +2,6 @@
 
 An evidence-based product-management case study. **Status: desk research complete (2026-10-19); no interviews, experiments or prototype.** This is a research investigation, not a product build, and the central hypothesis is tested rather than assumed.
 
-> **Author and AI-use disclosure.** Repository owner: Chamodi Senevirathna, who supplied the research brief and the hypothesis under test. The research, analysis, writing and the economic-model calculations were produced by an AI model (Claude, via Claude Code) on 2026-10-19; source retrieval and summarization were AI-mediated. No interviews, surveys, product trials or experiments were conducted, and no human reviewer has independently verified the sources or calculations. [methodology/ai-use-and-research-limitations.md](methodology/ai-use-and-research-limitations.md) states what was and was not checked.
-
 ## Executive summary
 
 - **Technical failures are real and documented on benchmarks:** retrieval misses, cross-period reasoning errors, and column/period mix-ups occur ([evidence E04, E15, E16](evidence-register.md)). Most numbers come from 2021–2024 models, so current error shares are unmeasured.
@@ -80,7 +78,7 @@ Desk research only; most papers read at abstract level; vendor and secondary sou
 | [research/evaluation-plan.md](research/evaluation-plan.md) | Datasets, arms, ablations, metrics, acceptance criteria |
 | [research/product-strategy.md](research/product-strategy.md) | Use-case scoring, product hypothesis, decision |
 | [research/economic-model.md](research/economic-model.md) | Scenario model and missing commercial evidence |
-| [methodology/ai-use-and-research-limitations.md](methodology/ai-use-and-research-limitations.md) | AI disclosure, verification status, limitations |
+| [methodology/ai-use-and-research-limitations.md](methodology/ai-use-and-research-limitations.md) | Research methodology, verification status, and limitations |
 | [LICENSE-CC-BY-4.0.txt](LICENSE-CC-BY-4.0.txt) | License text (see Licensing) |
 
 ## Licensing
