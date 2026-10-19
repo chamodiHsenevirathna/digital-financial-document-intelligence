@@ -76,3 +76,27 @@ Security, privacy and financial correctness are treated as **core requirements**
 ## 6. Technical conclusion
 
 Structure-aware parsing, table-aware chunking, deterministic calculation and verification are each supported by *some* evidence and each has a credible failure mode. The evidence does not yet show that the **combination** beats a strong baseline by a margin that matters, nor which part drives it. The experiment in [evaluation-plan](evaluation-plan.md) is designed to answer that.
+
+## 7. Proposed conceptual workflow (not an implemented system)
+
+**This is a proposed conceptual workflow. No part of it has been built, tested or evaluated.** It shows how the controls in sections 3 and 4 would fit together for the narrowed use case: financial documents with no suitable structured data source. It deliberately omits technology choices, because the research does not justify specific components. Those are what the [evaluation plan](evaluation-plan.md) would test.
+
+```mermaid
+flowchart TD
+    A["Financial document with no<br/>suitable structured data source"] --> B["Extract figures, units,<br/>reporting periods and table structure"]
+    B --> C["Retrieve supporting source evidence"]
+    C --> D["Calculate using deterministic methods"]
+    D --> E["Validate figures, units,<br/>periods and evidence"]
+    E --> F{"Answer sufficiently<br/>supported?"}
+    F -- "Yes" --> G["Return auditable answer<br/>with calculations and source references"]
+    F -- "No" --> H["Flag uncertainty or abstain<br/>route to human review, no invented result"]
+
+    classDef proposed fill:#fef3c7,stroke:#b45309,color:#111827,stroke-dasharray: 5 3
+    class A,B,C,D,E,F,G,H proposed
+```
+
+How to read it:
+
+- **Extract, retrieve:** failures here are the parsing and retrieval failures in section 1. Whether they dominate end-to-end error is unknown (section 2).
+- **Calculate, validate:** deterministic arithmetic cannot fix wrong inputs (section 3), so validation checks the extracted values, units and periods before an answer is accepted.
+- **Decision branch:** an unsupported answer is flagged or abstained on, not guessed. Any threshold for "sufficiently supported" must come from measured results and is not a calibrated probability (section 4).

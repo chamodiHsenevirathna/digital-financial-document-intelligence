@@ -9,6 +9,37 @@ An evidence-based product-management case study. **Status: desk research complet
 - **User and market evidence is weak.** No user research was done; the only demand signal is a vendor survey with no methodology (E21).
 - **Recommendation: conduct further problem validation** on a narrowed use case (extracting and validating financial-statement figures from documents **without** structured filings), alongside an offline reliability experiment. **Do not build a product yet.**
 
+## How the recommendation was reached
+
+This diagram shows the case study's decision path. Blue stages are **completed through desk research only**; amber stages are **proposed future work that has not been done**. No interviews, experiments or prototype exist.
+
+```mermaid
+flowchart TD
+    subgraph DONE["Completed: desk research only"]
+        A["Problem hypothesis<br/>supplied, then tested rather than assumed"] --> B["Desk research and evidence collection<br/>28 evidence-register entries"]
+        B --> C["Assess technical failure modes<br/>parsing, retrieval, calculation, citations"]
+        C --> D["Evaluate existing alternatives and structured data<br/>vendor products, free SEC XBRL data"]
+        D --> E["Examine economic feasibility and evidence gaps<br/>scenario model, no demand or pricing data"]
+        E --> F["Narrow the potential use case<br/>financial documents with no structured source"]
+        F --> G{"Product decision"}
+        G --> H["Validate the problem before building"]
+    end
+    subgraph NEXT["Proposed, not yet done"]
+        I["Analyst interviews<br/>8 to 12 planned"]
+        J["Offline reliability experiment<br/>protocol written, not run"]
+        K{"Revisit the build decision<br/>against pre-stated criteria"}
+        I --> K
+        J --> K
+    end
+    H --> I
+    H --> J
+
+    classDef done fill:#dbeafe,stroke:#1d4ed8,color:#111827
+    classDef next fill:#fef3c7,stroke:#b45309,color:#111827,stroke-dasharray: 5 3
+    class A,B,C,D,E,F,G,H done
+    class I,J,K next
+```
+
 ## Problem statement
 
 Analysts using AI on financial documents may not be able to trust results when parsing drops table structure, retrieval misses evidence, or an LLM does arithmetic without checks. Whether this is a *frequent, costly, un-served* problem for a specific user group is the open question.
@@ -41,9 +72,17 @@ Desk research under a stated source hierarchy (peer-reviewed → preprint → of
 | Analysts spend significant time verifying AI output | **Weak** (vendor survey, no methodology) | E21 |
 | Willingness to pay | **No evidence** | [economic-model](research/economic-model.md) |
 
+### Evidence at a glance
+
+What the desk research supports, what stays uncertain, and what only primary research or experiments can answer. Benchmark results here do **not** establish current system performance or customer demand.
+
+| Supported by the desk research | Uncertain or weakly evidenced | Needs interviews or experiments |
+|---|---|---|
+| • Retrieval, cross-period and wrong-column errors on benchmarks, mostly with older models (E04, E15, E16)<br>• Computing in code helped 2022-era models (E07, E08)<br>• Citations can fail to support claims in legal and web-search RAG (E09, E10)<br>• Free SEC XBRL data exists for US public filers (E25) | • Whether parsing is the main source of errors; one study found cheap parsers competitive (E14)<br>• The 89.3% FinanceBench result is self-reported (E17)<br>• Vendors' source-linking claims are unverified (E32)<br>• Verification time spent by analysts rests on a vendor survey (E21)<br>• Error rates of current models | • Whether the target segment exists and feels the pain<br>• How analysts work today and what they use<br>• Willingness to pay and who buys<br>• Which pipeline stage drives errors<br>• Whether the pipeline beats the best baseline<br>• False-acceptance and abstention rates<br>• Analyst minutes saved per document |
+
 ## Proposed product opportunity (provisional)
 
-A verification-first extraction and period-comparison tool for financial-statement documents without structured filings: structure-aware parsing with explicit units/periods, deterministic calculation, rule-based validation, span-level provenance and abstention. Use-case scoring and the rationale for choosing this over cross-document reconciliation or open-ended Q&A are in [research/product-strategy.md](research/product-strategy.md). The scores are author judgments. Differentiation from incumbents is **a hypothesis**: citations, table-aware chunking and calculator use are not differentiators. Landscape: [research/competitive-landscape.md](research/competitive-landscape.md).
+A verification-first extraction and period-comparison tool for financial-statement documents without structured filings: structure-aware parsing with explicit units/periods, deterministic calculation, rule-based validation, span-level provenance and abstention. Use-case scoring and the rationale for choosing this over cross-document reconciliation or open-ended Q&A are in [research/product-strategy.md](research/product-strategy.md). The scores are author judgments. Differentiation from incumbents is **a hypothesis**: citations, table-aware chunking and calculator use are not differentiators. Landscape: [research/competitive-landscape.md](research/competitive-landscape.md). A diagram of the **proposed conceptual workflow (not an implemented system)** is in [research/technical-analysis.md, section 7](research/technical-analysis.md#7-proposed-conceptual-workflow-not-an-implemented-system).
 
 ## Evaluation design
 
@@ -74,7 +113,7 @@ Desk research only; most papers read at abstract level; vendor and secondary sou
 | [evidence-register.md](evidence-register.md) | 28 register entries (some cover several sources) with URLs, dates, findings, limits, confidence, inspection depth |
 | [research/problem-discovery.md](research/problem-discovery.md) | Failure categories, competing explanations, segments, workflow, evidence for/against |
 | [research/competitive-landscape.md](research/competitive-landscape.md) | Existing tools and claimed capabilities, with verification status |
-| [research/technical-analysis.md](research/technical-analysis.md) | Pipeline failure propagation, deterministic tooling, safe-design controls |
+| [research/technical-analysis.md](research/technical-analysis.md) | Pipeline failure propagation, deterministic tooling, safe-design controls, proposed conceptual workflow |
 | [research/evaluation-plan.md](research/evaluation-plan.md) | Datasets, arms, ablations, metrics, acceptance criteria |
 | [research/product-strategy.md](research/product-strategy.md) | Use-case scoring, product hypothesis, decision |
 | [research/economic-model.md](research/economic-model.md) | Scenario model and missing commercial evidence |
